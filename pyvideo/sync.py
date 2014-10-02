@@ -1,6 +1,6 @@
 import requests
 from . import db
-
+from pymongo import errors as pymongo_err
 BASE_URL = "http://pyvideo.org/api/v2/video?page={}&ordering=-added"
 
 
@@ -12,8 +12,11 @@ def sync():
         resp = resp.json()
         for entry in resp["results"]:
             video = video_to_dict(entry)
-            db.videos.insert(video)
             videos.append(video)
+            try:
+                db.videos.insert(video)
+            except pymongo_err.DuplicateKeyError:
+                break
         i += 1
         print("Getting page number {}".format(i))
         resp = requests.get(BASE_URL.format(i))
