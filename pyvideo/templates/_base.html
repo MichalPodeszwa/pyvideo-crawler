@@ -10,6 +10,28 @@
         </style>
         <title>pyvideo.org API Crawler</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://notifyjs.com/dist/notify-combined.min.js"></script>
+        <script>
+            function start_sync() {
+
+                $.ajax({
+                    url: "{{ url_for('start_sync') }}",
+                    beforeSend: function() {
+                        $(".sync_button")
+                            .notify("Syncing started", "success");
+                    },
+                    success: function (data) {
+                        if (data["reload"]) {
+                            $.notify("Syncing finished.\nReloading in 2 seconds", "success");
+                            setTimeout(function() { location.reload() }, 2000);
+                        } else {
+                            $.notify("Nothing new is there. Finished", "success");
+                        }
+                    }
+                })
+
+            }
+        </script>
         {% block script %}{% endblock %}
     </head>
     <body>
@@ -26,7 +48,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="{{ url_for('start_sync') }}">Sync</a></li>
+                        <li class="active sync_button"><a href="javascript:start_sync()">Sync</a></li>
                     </ul>
                 </div>
             </div>

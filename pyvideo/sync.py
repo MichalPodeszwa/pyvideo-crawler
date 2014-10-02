@@ -5,25 +5,25 @@ BASE_URL = "http://pyvideo.org/api/v2/video?page={}&ordering=-added"
 
 
 def sync():
-    videos = []
     i = 1
+    should_reload = False
     resp = requests.get(BASE_URL.format(i))
     while resp.status_code == 200:
         resp = resp.json()
         for entry in resp["results"]:
             video = video_to_dict(entry)
-            videos.append(video)
             try:
                 db.videos.insert(video)
             except pymongo_err.DuplicateKeyError:
-                break
+                return should_reload
+            else:
+                should_reload = True
         i += 1
         print("Getting page number {}".format(i))
         resp = requests.get(BASE_URL.format(i))
         if i == 5:
             break
-
-    return videos
+    return should_reload
 
 
 def video_to_dict(video):

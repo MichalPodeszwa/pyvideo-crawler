@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, jsonify
 
 from . import app, db
 from .auth import requires_auth
@@ -13,8 +13,7 @@ def index():
 
 @app.route("/sync")
 def start_sync():
-    sync()
-    return redirect(url_for("index"))
+    return jsonify(msg="success", reload=sync())
 
 
 @app.before_request
