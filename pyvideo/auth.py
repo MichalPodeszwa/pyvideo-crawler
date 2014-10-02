@@ -2,13 +2,14 @@
 
 from functools import wraps
 from flask import request, Response
+import config
 
 
 def check_auth(username, password):
     """This function is called to check if a username /
     password combination is valid.
     """
-    return username == "admin" and password == "secret"
+    return username == config.username and password == config.password
 
 
 def authenticate():
