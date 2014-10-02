@@ -1,11 +1,14 @@
-from . import app
+from flask import render_template
+
+from . import app, db
 from .auth import requires_auth
 from .sync import sync
 
 
 @app.route("/")
 def index():
-    return "Hello world"
+    videos = list(db.videos.find())
+    return render_template("index.html", videos=videos)
 
 
 @app.route("/sync")
