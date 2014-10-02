@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, redirect, url_for
 
 from . import app, db
 from .auth import requires_auth
@@ -13,7 +13,8 @@ def index():
 
 @app.route("/sync")
 def start_sync():
-    return str(sync())
+    sync()
+    return redirect(url_for("index"))
 
 
 @app.before_request

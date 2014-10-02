@@ -33,7 +33,7 @@ def video_to_dict(video):
         "conference": video["category"],
         "url": get_url(video),
         "embed": video["embed"],
-        "added": video["added"],
+        "added": video["added"].split("T")[0],
     }
 
 
