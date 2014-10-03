@@ -22,8 +22,7 @@ def sync():
         i += 1
         print("Getting page number {}".format(i))
         resp = requests.get(BASE_URL.format(i))
-        if i == 5:
-            break
+
     return should_reload
 
 
