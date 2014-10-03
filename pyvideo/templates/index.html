@@ -12,7 +12,7 @@
 
     <tbody>
         {% for video in videos %}
-        <tr>
+        <tr id="{{ video.id }}">
             <td>{{ video.added }}</td>
             <td><a class="simple-ajax-popup" href="{{ url_for('get_embed', video_id=video._id) }}">{{ video.title }}</a></td>
             <td>{{ video.conference }}</td>

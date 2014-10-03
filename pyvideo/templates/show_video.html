@@ -1,4 +1,11 @@
 <div class="center jumbotron">
-        {{ embed | safe }}<br>
-        linkses1 | linkes2 | {{ video_id }}
+        {{ video.embed | safe }}<br>
+        <a id="interest" href="javascript:change_state('interest', {{ video._id }})">
+            Interested: 
+            <span class="glyphicon glyphicon-{% if video.interested %}ok{% else %}remove{% endif %}"></span>
+        </a> |
+        <a id="watched" href="javascript:change_state('watched', {{ video._id }})">
+            Watched: 
+            <span class="glyphicon glyphicon-{% if video.watched %}ok{% else %}remove{% endif %}"></span>
+        </a>
 </div>

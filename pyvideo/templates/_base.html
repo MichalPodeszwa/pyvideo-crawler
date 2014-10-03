@@ -17,36 +17,7 @@
         <script src="http://notifyjs.com/dist/notify-combined.min.js"></script>
         <script src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="/static/js/box.js"></script>
-        <script>
-            function start_sync() {
-
-                $.ajax({
-                    url: "{{ url_for('start_sync') }}",
-                    beforeSend: function() {
-                        $(".sync_button")
-                            .notify("Syncing started", "success");
-                    },
-                    success: function (data) {
-                        if (data["reload"]) {
-                            $.notify("Syncing finished.\nReloading in 2 seconds", "success");
-                            setTimeout(function() { location.reload() }, 2000);
-                        } else {
-                            $.notify("Nothing new is there. Finished", "success");
-                        }
-                    }
-                })
-            }
-
-            $(document).ready(function() {
-                table = $('#videos').DataTable();
-
-                $('.simple-ajax-popup').magnificPopup({
-                    type: 'ajax',
-                });
-
-            } );
-
-        </script>
+        <script type="text/javascript" src="/static/js/app.js"></script>
     </head>
     <body>
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">

@@ -35,6 +35,8 @@ def video_to_dict(video):
         "url": get_url(video),
         "embed": video["embed"],
         "added": video["added"].split("T")[0],
+        "interested": True,
+        "watched": False,
     }
 
 
