@@ -1,13 +1,13 @@
 import requests
 from . import db
 from pymongo import errors as pymongo_err
-BASE_URL = "http://pyvideo.org/api/v2/video?page={}&ordering=-added"
+import config
 
 
 def sync():
     i = 1
     should_reload = False
-    resp = requests.get(BASE_URL.format(i))
+    resp = requests.get(config.BASE_URL.format(i))
     while resp.status_code == 200:
         resp = resp.json()
         for entry in resp["results"]:
@@ -21,7 +21,7 @@ def sync():
                     should_reload = True
         i += 1
         print("Getting page number {}".format(i))
-        resp = requests.get(BASE_URL.format(i))
+        resp = requests.get(config.BASE_URL.format(i))
 
     return should_reload
 

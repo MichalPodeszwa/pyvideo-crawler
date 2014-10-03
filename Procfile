@@ -1,0 +1,1 @@
+web: gunicorn pyvideo:app --log-file - -b 0.0.0.0:5000
