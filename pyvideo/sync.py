@@ -12,12 +12,13 @@ def sync():
         resp = resp.json()
         for entry in resp["results"]:
             video = video_to_dict(entry)
-            try:
-                db.videos.insert(video)
-            except pymongo_err.DuplicateKeyError:
-                return should_reload
-            else:
-                should_reload = True
+            if video["url"]:
+                try:
+                    db.videos.insert(video)
+                except pymongo_err.DuplicateKeyError:
+                    return should_reload
+                else:
+                    should_reload = True
         i += 1
         print("Getting page number {}".format(i))
         resp = requests.get(BASE_URL.format(i))
@@ -38,10 +39,7 @@ def video_to_dict(video):
 
 
 def get_url(video):
-    urls = [
-        "source_url", "video_flv_url", "video_webm_url",
-        "video_mp4_url", "video_ogv_url"
-    ]
-    for url in urls:
-        if video[url]:
-            return video[url]
+    url = video["source_url"]
+    if "youtube" in url:
+        return url
+    return None

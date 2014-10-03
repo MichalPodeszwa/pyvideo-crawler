@@ -16,6 +16,13 @@ def start_sync():
     return jsonify(msg="success", reload=sync())
 
 
+@app.route("/get_embed/<int:video_id>")
+def get_embed(video_id):
+    embed = db.videos.find_one({"_id": video_id})["embed"]
+    return render_template(
+        "show_video.html", embed=embed, video_id=video_id)
+
+
 @app.before_request
 @requires_auth
 def require_auth():

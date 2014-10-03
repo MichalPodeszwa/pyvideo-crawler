@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<table class="table table-striped">
+<table id="videos" class="table table-striped">
     <thead>
         <td>Added</td>
         <td>Title</td>
@@ -14,7 +14,7 @@
         {% for video in videos %}
         <tr>
             <td>{{ video.added }}</td>
-            <td>{{ video.title }}</td>
+            <td><a class="simple-ajax-popup" href="{{ url_for('get_embed', video_id=video._id) }}">{{ video.title }}</a></td>
             <td>{{ video.conference }}</td>
             <td><a href="{{ video.url }}">Link</a></td>
         </tr>

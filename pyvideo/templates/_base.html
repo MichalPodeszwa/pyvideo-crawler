@@ -2,15 +2,21 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" />
+        <link rel="stylesheet" href="/static/css/box.css" type="text/css" media="screen" />
         <style>
             .center {
+                max-width: 700px;
+                margin: 20px auto;
+                background-color: #ddd;
                 text-align: center;
-                vertical-align: middle;
             }
         </style>
         <title>pyvideo.org API Crawler</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://notifyjs.com/dist/notify-combined.min.js"></script>
+        <script src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="/static/js/box.js"></script>
         <script>
             function start_sync() {
 
@@ -29,10 +35,18 @@
                         }
                     }
                 })
-
             }
+
+            $(document).ready(function() {
+                table = $('#videos').DataTable();
+
+                $('.simple-ajax-popup').magnificPopup({
+                    type: 'ajax',
+                });
+
+            } );
+
         </script>
-        {% block script %}{% endblock %}
     </head>
     <body>
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
