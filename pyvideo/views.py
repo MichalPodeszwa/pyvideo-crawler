@@ -2,12 +2,25 @@ from flask import render_template, jsonify, request
 from . import app, db
 from .auth import requires_auth
 from .sync import sync
-import json
+
 
 @app.route("/")
-def index():
-    videos = list(db.videos.find())
-    return render_template("index.html", videos=videos)
+@app.route("/<filtered>")
+def index(filtered=None):
+    if filtered:
+        videos = db.videos.find(
+            {"$and": [
+                {"watched": False},
+                {"interested": True}
+            ]}
+        )
+    else:
+        videos = db.videos.find()
+    return render_template(
+        "index.html",
+        videos=videos,
+        filter=bool(filtered)
+    )
 
 
 @app.route("/sync")
@@ -20,14 +33,6 @@ def get_embed(video_id):
     video = db.videos.find_one({"_id": video_id})
     return render_template(
         "show_video.html", video=video)
-
-
-def get_args():
-    video_id = request.args.get("id", None)
-    field = request.args.get("field", None)
-    if not video_id or not field:
-        return (None, None)
-    return (video_id, field)
 
 
 @app.route("/change_state")

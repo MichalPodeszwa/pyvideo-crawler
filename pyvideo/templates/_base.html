@@ -16,6 +16,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://notifyjs.com/dist/notify-combined.min.js"></script>
         <script src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript">
+            function post_change() {
+                {% if filter %}
+                    location.reload();
+                {% endif %}
+            }
+        </script>
         <script type="text/javascript" src="/static/js/box.js"></script>
         <script type="text/javascript" src="/static/js/app.js"></script>
     </head>
@@ -33,6 +40,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ url_for('index', filtered="filter") }}">Filtered view</a></li>
                         <li class="active sync_button"><a href="javascript:start_sync()">Sync</a></li>
                     </ul>
                 </div>

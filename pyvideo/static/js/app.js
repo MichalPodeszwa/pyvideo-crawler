@@ -36,6 +36,7 @@ function change_state(field, video_id) {
         },
         success: function(data) {
             $.notify(field+" changed to: " + data["new"], "success")
+            post_change();
         },
         error: function(data){
             $.notify(data["msg"])
