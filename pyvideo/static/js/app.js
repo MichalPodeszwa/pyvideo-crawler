@@ -19,7 +19,14 @@ function start_sync() {
 
 
 $(document).ready(function() {
-    table = $('#videos').DataTable();
+    table = $('#videos').DataTable({
+        "columns": [
+            {"searchable": false},
+            null,
+            null,
+            {"searchable": false, "orderable": false}
+        ]
+    });
 
     $('.simple-ajax-popup').magnificPopup({
         type: 'ajax',

@@ -41,6 +41,6 @@ def video_to_dict(video):
 
 def get_url(video):
     url = video["source_url"]
-    if "youtube" in url:
+    if url and "youtube" in url:
         return url
     return None
