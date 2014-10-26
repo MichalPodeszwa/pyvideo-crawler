@@ -4,14 +4,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" />
         <link rel="stylesheet" href="/static/css/box.css" type="text/css" media="screen" />
-        <style>
-            .center {
-                max-width: 700px;
-                margin: 20px auto;
-                background-color: #ddd;
-                text-align: center;
-            }
-        </style>
+        <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
         <title>pyvideo.org API Crawler</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://notifyjs.com/dist/notify-combined.min.js"></script>
@@ -46,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div id="content" style="margin-top:100px">
+        <div id="content">
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     <ul class=flashes>
@@ -60,9 +53,9 @@
                 {% block content %}{% endblock %}
             </div>
         </div>
-    <div id="footer" style="background-color: #f5f5f5; margin-top:30px">
+    <div id="footer">
         <div class="container">
-            <p class="muted credit" style="margin: 20px 0px">Made by <a href="http://www.github.com/MichalPodeszwa">Michał 'vessel' Podeszwa</a> in 2014.</p>
+            <p>Made by <a href="http://www.github.com/MichalPodeszwa">Michał 'vessel' Podeszwa</a> in 2014.</p>
         </div>
     </div>
 
