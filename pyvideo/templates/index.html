@@ -3,30 +3,17 @@
 {% block content %}
 
 <table id="videos" class="table table-striped">
-    <thead>
-        <td>Added</td>
-        <td>Title</td>
-        <td>Conference</td>
-        <td>Video URL</td>
-    </thead>
-
-    <tbody>
-        {% for video in videos %}
-        <tr id="{{ video.id }}">
-            <td>{{ video.added }}</td>
-            <td><a class="simple-ajax-popup" href="{{ url_for('get_embed', video_id=video._id) }}">{{ video.title }}</a></td>
-            <td>{{ video.conference }}</td>
-            <td><a href="{{ video.url }}">Link</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-
-    <tfoot>
-        <td>Added</td>
-        <td>Title</td>
-        <td>Conference</td>
-        <td>Video URL</td>
-    </tfoot>
 </table>
+
+<script>
+
+var dataMovies = [
+    {% for video in videos %}
+    ["{{ video.added }}", "<a class=\"simple-ajax-popup\" href=\"{{ url_for('get_embed', video_id=video._id) }}\">{{ video.title }}</a>", "{{ video.conference }}", "<a href=\"{{ video.url }}\">Link</a>"],
+    {% endfor %}
+]
+
+</script>
+
 
 {% endblock %}

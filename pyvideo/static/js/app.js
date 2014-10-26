@@ -20,12 +20,14 @@ function start_sync() {
 
 $(document).ready(function() {
     table = $('#videos').DataTable({
+        "data": dataMovies,
         "columns": [
-            {"searchable": false},
-            null,
-            null,
-            {"searchable": false, "orderable": false}
-        ]
+            {"title": "Added", "searchable": false},
+            {"title": "Title"},
+            {"title": "Converence"},
+            {"title": "Video URL", "searchable": false, "orderable": false},
+        ],
+        "deferRender": true,
     });
 
     $('.simple-ajax-popup').magnificPopup({
